@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lottie/lottie.dart';
 import 'dart:ui' as ui;
 
 import 'package:ocr/utils/utils.dart';
@@ -38,7 +39,9 @@ class _FaceDetectorPageState extends State<FaceDetectorPage> {
                       foregroundPainter: ImagePainter(faces, imageFile),
                       //child: imageLoaded?Image.file(imageFile):const Text('No Image'),
                     )
-                  : Container(),
+                  : Center(
+                      child: Lottie.asset('assets/1716313982932.json'),
+                    ),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.deepOrange),
               ),
@@ -46,7 +49,6 @@ class _FaceDetectorPageState extends State<FaceDetectorPage> {
           ),
         ],
       ),
-      //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 60.0),
         child: FloatingActionButton(
@@ -112,7 +114,7 @@ class ImagePainter extends CustomPainter {
   ImagePainter(this.faces, this.imageFile);
 
   @override
-  void paint(Canvas canvas, Size size) async {
+  void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
       ..color = const Color.fromRGBO(255, 0, 0, 1)
       ..strokeWidth = 1
@@ -122,7 +124,6 @@ class ImagePainter extends CustomPainter {
     faces.forEach((face) {
       canvas.drawRect(face.boundingBox, paint);
     });
-    //canvas.drawRect(Offset(0,0) & Size(size.width, size.height), paint);
   }
 
   @override

@@ -61,10 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void stopCameraFeed() async {
-    if (_cameraController != null) {
-      _cameraController.dispose();
-      await _initializeCamera(); // Re-initialize the camera
-    }
+    _cameraController.dispose();
+    await _initializeCamera(); // Re-initialize the camera
   }
 
   void _switchCamera() async {

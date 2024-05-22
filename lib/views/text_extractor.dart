@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 
 class Recognizerscreen extends StatefulWidget {
@@ -33,7 +34,8 @@ class _RecognizerscreenState extends State<Recognizerscreen> {
 
   doTextRecognition() async {
     InputImage inputImage = InputImage.fromFile(widget.image);
-    final RecognizedText recognizedText = await textRecognizer.processImage(inputImage);
+    final RecognizedText recognizedText =
+        await textRecognizer.processImage(inputImage);
 
     setState(() {
       results = recognizedText.text;
@@ -55,6 +57,13 @@ class _RecognizerscreenState extends State<Recognizerscreen> {
         }
       }
     }
+  }
+
+  void copyTextToClipboard() {
+    Clipboard.setData(ClipboardData(text: results));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Text copied to clipboard')),
+    );
   }
 
   @override
@@ -82,10 +91,12 @@ class _RecognizerscreenState extends State<Recognizerscreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Results', style: TextStyle(color: Colors.white)),
+                          Text('Results',
+                              style: TextStyle(color: Colors.white)),
                           IconButton(
                             icon: Icon(Icons.copy, color: Colors.white),
                             onPressed: () {
+                              copyTextToClipboard();
                               // Implement copy functionality if needed
                             },
                           ),
@@ -97,15 +108,15 @@ class _RecognizerscreenState extends State<Recognizerscreen> {
                       child: _scanning
                           ? Center(child: CircularProgressIndicator())
                           : Center(
-                        child: Text(
-                          results,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                              child: Text(
+                                results,
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
                     ),
                   ],
                 ),

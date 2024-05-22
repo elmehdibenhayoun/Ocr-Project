@@ -24,6 +24,7 @@ dependencies:
   google_ml_kit: ^0.18.0
   permission_handler: ^11.3.1
   lottie: ^1.2.1
+  
 
 dev_dependencies:
   flutter_test:
@@ -36,3 +37,4 @@ flutter:
   assets:
     - assets/1716313982932.json
     - assets/ezgif-7-79a74e8062.gif
+    

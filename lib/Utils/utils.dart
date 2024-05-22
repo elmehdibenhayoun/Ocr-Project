@@ -62,7 +62,7 @@ class Utils {
     for (TextBlock block in recognizedText.blocks) {
       for (TextLine textLine in block.lines) {
         for (TextElement textElement in textLine.elements) {
-          content += " " + textElement.text;
+          content += " ${textElement.text}";
         }
         content += '\n';
       }
